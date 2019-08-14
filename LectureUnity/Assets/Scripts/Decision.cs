@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Decision : MonoBehaviour
 {
     public GameObject go;
     public GameObject tet;
-    public GameObject tex;
+    public Text ouch;
+    public Text right;
+    public Text left;
 
     public float speed2;
     public float speed3;
@@ -19,14 +22,17 @@ public class Decision : MonoBehaviour
         if (go.activeSelf == true)
         {
             time = tet.GetComponent<Timer>().targetTime;
+            if (time < 0.7)
+            {
+                ouch.text = "OUCH!!!";
+            }
             if (time < 0)
             {
-                EnableCanvas();
+                EnableCanvas(go);
                 GameObject.Find("Player").GetComponent<Movement>().moveVertical = speed3;
-                EnableText();
-                Example();
-                DisableText();
+                ouch.text = "";
                 tet.GetComponent<Timer>().targetTime = 7.0f;
+
             }
         }
 
@@ -35,38 +41,42 @@ public class Decision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameObject.Find("Player").GetComponent<Movement>().moveVertical = speed2;
-        Debug.Log("Sie");
-        DisableCanvas();
+        DisableCanvas(go);
+        Debug.Log("Hits:" + Variables.Hit);
+        switch (Variables.Hit)
+        {
+            case 0: left.text = "Elderly person";
+                right.text = "Child";
+                Variables.Hit = 1;
+                break;
+            case 1: left.text = "Doctor";
+                right.text = "Policeman";
+                Variables.Hit = 2;
+                break;
+            case 2: left.text = "Black heterosexual";
+                right.text = "White homosexual";
+                Variables.Hit = 3;
+                break;
+            case 3: left.text = "Two of your neighbours little children";
+                right.text = "Four teenagers with signs and banners";
+                Variables.Hit = 4;
+                break;
+            case 4: left.text = "You and your baby";
+                right.text = "Your daughter";
+                Variables.Hit = 5;
+                break;
+        }
+        Debug.Log("Hits:" + Variables.Hit);
 
     }
 
-    IEnumerator Example()
+    void DisableCanvas(GameObject c)
     {
-        print(Time.time);
-        Debug.Log("Sie");
-        yield return new WaitForSeconds(2);
-        Debug.Log("Sie");
-        print(Time.time);
+        c.SetActive(true);
     }
 
-    void DisableCanvas()
+    void EnableCanvas(GameObject c)
     {
-        go.SetActive(true);
-        Debug.Log("Sie");
-    }
-
-    void EnableCanvas()
-    {
-        go.SetActive(false);
-    }
-
-    void EnableText()
-    {
-        tex.SetActive(true);
-    }
-
-    void DisableText()
-    {
-        tex.SetActive(false);
+        c.SetActive(false);
     }
 }

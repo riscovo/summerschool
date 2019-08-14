@@ -13,7 +13,14 @@ public class End : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene("EndScreen", LoadSceneMode.Additive);
+        Debug.Log("Ende");
+        SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            
+            Debug.Log("Ende");
+        }
+
 
     }
 }

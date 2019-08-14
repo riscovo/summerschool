@@ -1,39 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Movement : MonoBehaviour{
 
     public float speed, moveVertical;
+    public Text countText;
 
     private Rigidbody rb;
+    private int count;
 
     // Start is called before the first frame update
     void Start()
     {
-    rb = GetComponent<Rigidbody>(); 
+        rb = GetComponent<Rigidbody>();
+        count = 0;
+        SetCountText();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-       /* if (Input.GetAxis("Vertical") < 0)
-        {
-            moveVertical = 0.0f;
-        }
-        else
-        {
-            moveVertical = Input.GetAxis("Vertical");
-        }
-        moveVertical = Input.GetAxis("Vertical");*/
         float moveHorizontal = Input.GetAxis("Horizontal");
-
-        //Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
         rb.velocity = new Vector3(moveHorizontal + moveHorizontal, 0.0f, moveVertical);
 
-        //rb.AddForce(movement * speed);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,6 +33,14 @@ public class Movement : MonoBehaviour{
         if (other.gameObject.CompareTag("Pick Up"))
         {
             other.gameObject.SetActive(false);
+            count = count + 1;
+            SetCountText();
         }
     }
+
+    void SetCountText()
+    {
+        countText.text = "Count: " + count.ToString();
+    }
 }
+
