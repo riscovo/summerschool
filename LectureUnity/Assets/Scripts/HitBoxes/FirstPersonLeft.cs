@@ -6,8 +6,11 @@ public class FirstPersonLeft : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Variables.Left = 1;
-        Variables.Hit = 1;
-        Debug.Log("FP Left" + Variables.Left);
+        if (other.gameObject.name == "Player")
+        {
+            Variables.Left1 = true;
+            Variables.Hit = 1;
+            Debug.Log("FP 1 Left" + Variables.Left1);
+        }
     }
 }
