@@ -45,8 +45,8 @@ public class Decision : MonoBehaviour
         Debug.Log("Hits:" + Variables.Hit);
         switch (Variables.Hit)
         {
-            case 0: left.text = "Elderly person";
-                right.text = "Child";
+            case 0: left.text = "Elderly man making Ice cream";
+                right.text = "Elderly woman making burgers";
                 Variables.Hit = 1;
                 break;
             case 1: left.text = "Doctor";

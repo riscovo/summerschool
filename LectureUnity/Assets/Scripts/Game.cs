@@ -4,21 +4,25 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-    public InputField input;
-    public Button button;
+    public Text input;
+    public Text button;
 
     public void NextScene()
     {
-        /*if (Variables.IsName(input.GetComponentInChildren<Text>().text))
+        if (Variables.names.Contains(input.text))
         {
-            button.GetComponentInChildren<Text>().text = "Already played";
+            Debug.Log("ALready there");
+            button.text = "Already played";
+            Variables.There = true;
         }
         else
         {
+            button.text = "Start";
+            Variables.names.Add(input.text);
+            Variables.There = false;
+            Debug.Log("Added");
             SceneManager.LoadScene("Prolog", LoadSceneMode.Single);
-        }*/
-
-        SceneManager.LoadScene("Prolog", LoadSceneMode.Single);
-
+        }
     }
 }
+

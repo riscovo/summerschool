@@ -12,8 +12,6 @@ public class Dialog : MonoBehaviour
     {
         start = GetComponent<Text>();
         StartCoroutine(waiter());
-        Variables.Left = 0;
-        Variables.Right = 0;
         Variables.Hit = 0;
 
     }
@@ -30,14 +28,17 @@ public class Dialog : MonoBehaviour
         //Wait for 2 seconds
         yield return new WaitForSeconds(2);
 
-        //Rotate 20 deg
         start.text = "What am I supposed to do?";
 
         yield return new WaitForSeconds(2);
 
-        start.text = "No, no, no, it's the crossroads!";
+        start.text = "No, no, no, it's a crossroad!";
 
         yield return new WaitForSeconds(2);
+
+        start.text = "Move your car to the left with A/Left Arrow and right with D/Right Arrow";
+
+        yield return new WaitForSeconds(3);
 
         start.text = "";
     }
